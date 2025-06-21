@@ -1,0 +1,686 @@
+/* Mumbai Retina Center - Main Stylesheet */
+
+/*
+Color Palette:
+- Primary Medical Blue: #1e3a8a
+- Secondary Medical Blue: #3b82f6
+- White: #FFFFFF
+- Subtle Gray (backgrounds): #f0f4f8
+- Text Gray (body): #333333
+- Darker Gray (headings/accents): #111827
+*/
+
+:root {
+    --primary-color: #1e3a8a;
+    --secondary-color: #3b82f6;
+    --white-color: #FFFFFF;
+    --light-gray-color: #f0f4f8; /* Adjusted from #f4f7f9 for slight differentiation from example */
+    --text-gray-color: #333333;
+    --dark-gray-color: #111827; /* For headings or darker accents */
+
+    /* Fonts */
+    --font-primary: 'Inter', sans-serif;
+    --font-secondary: 'Roboto', sans-serif; /* Fallback or alternative */
+}
+
+/* Basic Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base font size */
+}
+
+body {
+    font-family: var(--font-primary);
+    color: var(--text-gray-color);
+    line-height: 1.6;
+    background-color: var(--white-color); /* Default background */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--dark-gray-color); /* Or --primary-color for more emphasis */
+    margin-bottom: 0.75em;
+    line-height: 1.2;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: var(--primary-color);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul, ol {
+    list-style-position: inside;
+    padding-left: 1.5em; /* Or adjust as needed */
+    margin-bottom: 1em;
+}
+
+/* Utility Classes (can be expanded later) */
+.container {
+    width: 90%;
+    max-width: 1200px; /* Standard max width */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Placeholder for Header, Main, Footer common styles - to be developed */
+header {
+    /* background-color: var(--light-gray-color); */
+    padding: 1em 0;
+    border-bottom: 1px solid #ddd; /* Example */
+}
+
+main {
+    padding: 2em 0;
+}
+
+footer {
+    background-color: var(--dark-gray-color);
+    color: var(--light-gray-color);
+    padding: 2em 0;
+    text-align: center;
+    border-top: 1px solid #444; /* Example for dark footer */
+}
+
+.site-footer p {
+    margin-bottom: 0.5em;
+}
+
+.site-footer a {
+    color: var(--accent-color); /* Or a lighter blue for dark background */
+}
+
+.site-footer a:hover {
+    color: var(--white-color);
+}
+
+
+/* Header Styles */
+.site-header {
+    background-color: var(--white-color);
+    padding: 1rem 0;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+}
+
+#logo {
+    height: 50px; /* Adjust as needed */
+    width: auto;
+    margin-right: 15px;
+}
+
+.site-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.main-navigation .nav-menu {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.main-navigation .nav-menu li {
+    margin-left: 20px;
+}
+
+.main-navigation .nav-menu a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    padding: 0.5em 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.main-navigation .nav-menu a:hover,
+.main-navigation .nav-menu a.active { /* Add .active class for current page */
+    color: var(--secondary-color);
+}
+
+.main-navigation .nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.main-navigation .nav-menu a:hover::after,
+.main-navigation .nav-menu a.active::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.5em 0.75em;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Footer Styles */
+.site-footer {
+    background-color: var(--primary-color); /* Changed to primary color */
+    color: var(--light-gray-color); /* Light text on dark background */
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.site-footer p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+/* Print Styles Placeholder */
+@media print {
+    body {
+        background-color: var(--white-color);
+        color: #000;
+    }
+    /* Add more print-specific styles here */
+}
+
+
+/* Responsive Navigation Styles */
+@media (max-width: 768px) { /* Tablet and Mobile breakpoint */
+    .site-header .container {
+        flex-wrap: wrap; /* Allow wrapping for menu button */
+    }
+
+    .logo-area {
+        flex-grow: 1; /* Allow logo to take available space */
+    }
+
+    .menu-toggle {
+        display: block; /* Show hamburger button */
+        order: 2; /* Place it after nav items if they were visible */
+    }
+
+    .main-navigation {
+        width: 100%;
+        order: 3; /* Place nav below logo and button */
+    }
+
+    .main-navigation .nav-menu {
+        display: none; /* Hide menu by default on mobile */
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--white-color);
+        position: absolute;
+        top: 100%; /* Position below the header */
+        left: 0;
+        right: 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        padding: 1em 0; /* Add some padding */
+    }
+
+    .main-navigation .nav-menu.active {
+        display: flex; /* Show when active */
+    }
+
+    .main-navigation .nav-menu li {
+        margin-left: 0;
+        width: 100%;
+        text-align: center; /* Center nav items */
+    }
+
+    .main-navigation .nav-menu a {
+        display: block;
+        padding: 0.75em 1em; /* Make links easier to tap */
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .main-navigation .nav-menu li:last-child a {
+        border-bottom: none;
+    }
+
+    .main-navigation .nav-menu a::after {
+        display: none; /* No underline effect on mobile for simplicity */
+    }
+}
+
+/* Homepage Hero Section */
+.hero-section {
+    background-color: var(--light-gray-color); /* A very light, almost white background */
+    padding: 4rem 0;
+    text-align: left;
+}
+
+.hero-content-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.hero-text {
+    flex-basis: 60%;
+    max-width: 60%;
+}
+
+.hero-text h1 {
+    font-size: 2.8rem; /* Professional and impactful */
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 0.5em;
+}
+
+.hero-text .subtitle {
+    font-size: 1.3rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+    margin-bottom: 1em;
+}
+
+.hero-text .hero-description {
+    font-size: 1.1rem;
+    color: var(--text-gray-color);
+    margin-bottom: 1.5em;
+    line-height: 1.7;
+}
+
+.hero-credentials {
+    margin-bottom: 2em;
+}
+
+.hero-credentials span {
+    display: block; /* Or inline-block with margin */
+    margin-bottom: 0.5em;
+    font-size: 0.95rem;
+    color: var(--dark-gray-color);
+    /* Add icon styling if you use actual icons */
+}
+
+.hero-credentials span i { /* Basic icon styling */
+    margin-right: 8px;
+    color: var(--secondary-color);
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    padding: 0.8em 1.8em;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.hero-image-area {
+    flex-basis: 35%;
+    max-width: 35%;
+    text-align: center; /* Or right */
+}
+
+.hero-doctor-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* Subtle rounding */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+
+/* Responsive Hero Section */
+@media (max-width: 992px) { /* Adjust breakpoint as needed */
+    .hero-text h1 {
+        font-size: 2.4rem;
+    }
+    .hero-text .subtitle {
+        font-size: 1.15rem;
+    }
+    .hero-text .hero-description {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content-area {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-text {
+        max-width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .hero-text h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-image-area {
+        max-width: 70%; /* Control image size on mobile */
+        margin: 0 auto;
+    }
+
+    .hero-credentials span {
+        text-align: center; /* Or keep left if preferred */
+    }
+}
+
+/* Generic section styling for subsequent sections */
+.text-section { /* For sections like Trust Indicators, Why Choose Us */
+    padding: 3rem 0;
+}
+
+.text-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5em;
+}
+
+/* Quick Contact Section */
+.quick-contact-content {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 2rem;
+    align-items: flex-start; /* Align items to the top */
+    margin-top: 2rem;
+}
+
+.contact-details {
+    flex: 1; /* Takes up available space */
+    min-width: 300px; /* Minimum width before wrapping */
+}
+
+.contact-details h3 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.contact-details p {
+    font-size: 1rem;
+    color: var(--text-gray-color);
+    margin-bottom: 0.8em;
+    line-height: 1.6;
+}
+
+.contact-details p i { /* Placeholder for icons */
+    margin-right: 10px;
+    color: var(--secondary-color);
+    width: 20px; /* Ensure alignment */
+    display: inline-block;
+    text-align: center;
+}
+/* Example placeholder icons */
+.icon-location::before { content: "📍"; }
+.icon-phone::before { content: "📞"; }
+.icon-mobile::before { content: "📱"; }
+.icon-email::before { content: "✉️"; }
+
+
+.contact-details .cta-button { /* Re-style or use global if defined */
+    margin-top: 1.5rem;
+}
+
+.map-placeholder {
+    flex: 1; /* Takes up available space */
+    min-width: 300px; /* Minimum width before wrapping */
+    background-color: #e9ecef; /* Light gray for placeholder */
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px; /* Ensure it has some height */
+}
+
+.map-placeholder img {
+    max-width: 100%;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+.map-placeholder p {
+    font-style: italic;
+    color: var(--dark-gray-color);
+}
+
+@media (max-width: 768px) {
+    .quick-contact-content {
+        flex-direction: column;
+    }
+    .contact-details, .map-placeholder {
+        width: 100%;
+    }
+}
+
+/* Services Overview Section Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.service-item {
+    background-color: var(--white-color);
+    padding: 2rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.service-item i { /* Placeholder for icons */
+    font-size: 2.5rem; /* Adjust as needed */
+    color: var(--primary-color); /* Primary color for service icons */
+    margin-bottom: 1rem;
+    display: block;
+}
+/* Example placeholder icons */
+.icon-surgery::before { content: "⚕️"; } /* Caduceus or similar medical symbol */
+.icon-injection::before { content: "💉"; }
+.icon-laser::before { content: "💡"; } /* Light bulb for laser */
+.icon-diagnostics::before { content: "📊"; }
+.icon-rop::before { content: "👶"; }
+.icon-amd::before { content: "👁️"; } /* Eye icon */
+
+
+.service-item h3 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.service-item p {
+    font-size: 0.95rem;
+    color: var(--text-gray-color);
+    line-height: 1.6;
+    margin-bottom: 1.5rem; /* Space before link */
+}
+
+.learn-more-link {
+    display: inline-block;
+    color: var(--secondary-color);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.5em 0;
+    position: relative;
+}
+
+.learn-more-link::after {
+    content: ' →'; /* Arrow */
+}
+
+.learn-more-link:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* Why Choose Us / Differentiators Section */
+.differentiators-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.differentiator-item {
+    background-color: var(--light-gray-color); /* Slightly different background for items */
+    padding: 1.5rem;
+    border-radius: 8px;
+    /* box-shadow: 0 2px 8px rgba(0,0,0,0.06); */ /* Optional subtle shadow */
+    text-align: left; /* Or center if preferred */
+    border-left: 4px solid var(--primary-color); /* Accent border */
+}
+
+.differentiator-item i { /* Placeholder for icons */
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+    display: block; /* Or inline-block */
+}
+/* Example placeholder icons */
+.icon-expertise::before { content: "🎓"; }
+.icon-tech::before { content: "⚙️"; }
+.icon-care::before { content: "❤️"; }
+.icon-experience::before { content: "⭐"; }
+
+
+.differentiator-item h3 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.differentiator-item p {
+    font-size: 0.95rem;
+    color: var(--text-gray-color);
+    line-height: 1.6;
+}
+
+
+/* Quick Contact Section - Placeholder Styles */
+.quick-contact-section {
+    padding: 3rem 0;
+    background-color: var(--light-gray-color); /* Match services or distinct color */
+}
+
+.quick-contact-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5em;
+}
+
+/* Trust Indicators Section */
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.trust-item {
+    background-color: var(--white-color); /* Or a very light gray if section bg is white */
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    border-top: 3px solid var(--secondary-color);
+}
+
+.trust-item i { /* Placeholder for icons */
+    font-size: 2.5rem; /* Adjust as needed */
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    display: block; /* Or inline-block */
+    /* Example using placeholder class names, replace with actual icon classes */
+}
+.icon-globe::before { content: "🌐"; } /* Example, replace with real icon class */
+.icon-calendar::before { content: "📅"; }
+.icon-research::before { content: "🔬"; }
+.icon-membership::before { content: "⭐"; }
+
+
+.trust-item h3 {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.trust-item p {
+    font-size: 0.95rem;
+    color: var(--text-gray-color);
+    line-height: 1.6;
+}
+
+/* Services Overview Section - Placeholder Styles */
+.services-section { /* Also for services-overview */
+    padding: 3rem 0;
+    background-color: var(--light-gray-color); /* Alternate background color */
+}
+
+.services-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5em;
+}

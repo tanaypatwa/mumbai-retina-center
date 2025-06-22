@@ -1,10 +1,10 @@
-# Mumbai Retina Center Website Revamp: Analysis and Plan
+# Mumbai Retina Centre Website Revamp: Analysis and Plan
 
-This document outlines the plan to revamp the Mumbai Retina Center website.
+This document outlines the plan to revamp the Mumbai Retina Centre website.
 
 ## 1. Project Goal
 
-The primary goal is to create a modern, professional, and minimalistic static website to serve as a discovery page for the Mumbai Retina Center. The new site must be fully responsive and provide a much-improved user experience compared to the current one.
+The primary goal is to create a modern, professional, and minimalistic static website to serve as a discovery page for the Mumbai Retina Centre. The new site must be fully responsive and provide a much-improved user experience compared to the current one.
 
 ## 2. Analysis of the Old Website
 

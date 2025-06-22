@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Mumbai Retina Center</title>
+    <meta name="description" content="View our gallery of clinic facilities, advanced technology, and our dedicated team at the Mumbai Retina Center.">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="../assets/Logo.JPG" alt="Mumbai Retina Center Logo">
+                <span>Mumbai Retina Center</span>
+            </a>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Dr. Dudani</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="conditions.html">Conditions</a></li>
+                    <li><a href="technology.html">Technology</a></li>
+                    <li><a href="patient-education.html">Patient Education</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container">
+                <h1>Our Gallery</h1>
+                <p class="subtitle">A glimpse into our world-class facilities and patient-centric environment.</p>
+            </div>
+        </section>
+
+        <section class="gallery-section">
+            <div class="container">
+                <div class="gallery-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="clinic">Clinic & Facilities</button>
+                    <button class="filter-btn" data-filter="team">Dr. Dudani & Team</button>
+                    <button class="filter-btn" data-filter="tech">Technology</button>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-category="clinic">
+                        <img src="../assets/Patients waiting at clinic.jpg" alt="Patients waiting at clinic">
+                    </div>
+                    <div class="gallery-item" data-category="tech">
+                        <img src="../assets/Operating picture.jpg" alt="Ophthalmic Surgery">
+                    </div>
+                     <div class="gallery-item" data-category="team">
+                        <img src="../assets/Dr Dudani potrait.jpg" alt="Dr Ajay Dudani">
+                    </div>
+                    <div class="gallery-item" data-category="clinic">
+                        <img src="../assets/talking to patients.jpg" alt="Doctor talking to patient">
+                    </div>
+                    <div class="gallery-item" data-category="team">
+                        <img src="../assets/checking patient's eyes.jpg" alt="Doctor checking patient's eyes">
+                    </div>
+                    <div class="gallery-item" data-category="tech">
+                        <img src="../assets/IMG_6195.jpg" alt="Advanced Equipment">
+                    </div>
+                    <div class="gallery-item" data-category="tech">
+                        <img src="../assets/IMG_6202.jpg" alt="Advanced Equipment">
+                    </div>
+                    <div class="gallery-item" data-category="clinic">
+                        <img src="../assets/IMG_1200.jpg" alt="Clinic Interior">
+                    </div>
+                     <div class="gallery-item" data-category="tech">
+                        <img src="../assets/IMG_6198.jpg" alt="Advanced Equipment">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lightbox -->
+        <div class="lightbox" id="lightbox">
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-content" id="lightbox-img">
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-nav">
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-info">
+                <p>&copy; 2024 Mumbai Retina Center. All Rights Reserved.</p>
+                <p>Designed by [Your Name/Agency]</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

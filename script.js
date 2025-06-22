@@ -1,4 +1,106 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Force cleanup any stuck dropdown states on page load
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+        dropdown.classList.remove('active');
+    });
+    
+    // Hamburger Menu Toggle
+    const hamburger = document.querySelector('.hamburger-menu');
+    const navLinks = document.querySelector('.nav-links');
+
+    console.log('Hamburger element found:', hamburger); // Debug log
+    console.log('Nav links element found:', navLinks); // Debug log
+
+    if (hamburger && navLinks) {
+        let isAnimating = false; // Prevent multiple rapid clicks
+        
+        hamburger.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            if (isAnimating) return; // Prevent multiple clicks during animation
+            isAnimating = true;
+            
+            console.log('Hamburger menu clicked!'); // Debug log
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            
+            console.log('Active class on navLinks:', navLinks.classList.contains('active')); // Debug log
+            console.log('Nav links computed style right:', window.getComputedStyle(navLinks).right); // Debug log
+            
+            // Reset animation flag after transition completes
+            setTimeout(() => {
+                isAnimating = false;
+            }, 400); // Match CSS transition duration
+        });
+
+        // Close menu when a link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Don't close menu if clicking dropdown toggle
+                if (!e.target.closest('.dropdown-toggle')) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    // Close any open dropdowns
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
+                }
+            });
+        });
+    }
+
+    // Dropdown functionality
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+
+    dropdownToggles.forEach(toggle => {
+        // Handle both click and touch events for mobile
+        ['click', 'touchstart'].forEach(eventType => {
+            toggle.addEventListener(eventType, (e) => {
+                // Always prevent the link from navigating
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Check if we are in the mobile view (where hamburger is visible)
+                if (window.matchMedia('(max-width: 1024px)').matches) {
+                    const navLinks = document.querySelector('.nav-links');
+                    // Only allow dropdown if mobile nav is open
+                    if (navLinks && navLinks.classList.contains('active')) {
+                        console.log('Mobile dropdown toggle clicked'); // Debug log
+                        toggle.parentElement.classList.toggle('active');
+                    }
+                }
+            });
+        });
+    });
+
+    // Click outside to close dropdowns
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+
+    // Reset dropdown state on window resize
+    window.addEventListener('resize', () => {
+        if (window.matchMedia('(min-width: 1025px)').matches) {
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+
+    // Add mouse leave handlers for desktop
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+        dropdown.addEventListener('mouseleave', () => {
+            if (window.matchMedia('(min-width: 1025px)').matches) {
+                dropdown.classList.remove('active');
+            }
+        });
+    });
+
     const accordionButtons = document.querySelectorAll('.accordion-button');
 
     accordionButtons.forEach(button => {
@@ -85,53 +187,29 @@ document.addEventListener('DOMContentLoaded', function () {
     faqQuestions.forEach(question => {
         question.addEventListener('click', () => {
             const answer = question.nextElementSibling;
-            const isActive = question.classList.contains('active');
+            const item = question.parentElement;
+            const isActive = item.classList.contains('active');
 
-            // Close all other FAQ items in the same category
-            const categoryContent = question.closest('.faq-category-content');
-            const allQuestionsInCategory = categoryContent.querySelectorAll('.faq-question');
-            const allAnswersInCategory = categoryContent.querySelectorAll('.faq-answer');
-
-            allQuestionsInCategory.forEach(q => q.classList.remove('active'));
-            allAnswersInCategory.forEach(a => {
-                a.classList.remove('active');
-                a.style.maxHeight = '0';
+            // Close all items first for a classic accordion feel
+            // If you want multiple items to be open at once, remove this loop
+            const allItems = question.closest('.faq-accordion').querySelectorAll('.faq-item');
+            allItems.forEach(i => {
+                if (i !== item) {
+                    i.classList.remove('active');
+                    i.querySelector('.faq-answer').style.maxHeight = null;
+                }
             });
 
-            // If this wasn't active, open it
-            if (!isActive) {
-                question.classList.add('active');
-                answer.classList.add('active');
+            // Toggle the clicked item
+            item.classList.toggle('active');
+
+            if (item.classList.contains('active')) {
                 answer.style.maxHeight = answer.scrollHeight + 'px';
+            } else {
+                answer.style.maxHeight = null;
             }
         });
     });
-
-    // Contact form submission (placeholder)
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(contactForm);
-            const name = formData.get('name');
-            const phone = formData.get('phone');
-            const urgency = formData.get('urgency');
-            
-            // Simple validation
-            if (!name || !phone) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // Show success message (in real implementation, this would send to server)
-            alert(`Thank you, ${name}! We will contact you within 24 hours regarding your ${urgency} consultation request.`);
-            
-            // Reset form
-            contactForm.reset();
-        });
-    }
 });
 
 // Gallery filtering functionality

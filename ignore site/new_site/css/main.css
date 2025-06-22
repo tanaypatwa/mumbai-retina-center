@@ -1,0 +1,746 @@
+/* 
+TABLE OF CONTENTS
+---------------------------
+1.  Global Styles
+2.  Header & Navigation
+3.  Hero Section
+4.  Trust Indicators
+5.  Services Overview
+6.  Why Choose Us
+7.  Quick Contact
+8.  Footer
+9.  Responsive Design
+10. About Page Styles
+11. Services Page Styles
+12. Condition Detail Page Styles
+13. Technology Page Styles
+14. Patient Education Page Styles
+15. Gallery Page Styles
+16. Contact Page Styles
+*/
+
+/* 1. Global Styles */
+:root {
+    --primary-blue: #1e3a8a;
+    --secondary-blue: #3b82f6;
+    --light-gray: #f3f4f6;
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+    --white: #ffffff;
+    --font-primary: 'Inter', sans-serif;
+    --font-secondary: 'Roboto', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-secondary);
+    color: var(--text-dark);
+    line-height: 1.6;
+    background-color: var(--white);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.25rem; text-align: center; margin-bottom: 2.5rem;}
+h3 { font-size: 1.25rem; }
+
+a {
+    text-decoration: none;
+    color: var(--secondary-blue);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+section {
+    padding: 4rem 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--secondary-blue);
+    color: var(--white);
+}
+.btn-primary:hover {
+    background-color: var(--primary-blue);
+}
+
+.btn-secondary {
+    background-color: var(--light-gray);
+    color: var(--primary-blue);
+    border: 1px solid var(--primary-blue);
+}
+
+.text-center {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* 2. Header & Navigation */
+.main-header {
+    background: var(--white);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 1rem 0;
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--primary-blue);
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 2rem;
+}
+
+.nav-links a {
+    color: var(--text-dark);
+    font-weight: 600;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s, border-bottom-color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--secondary-blue);
+    border-bottom-color: var(--secondary-blue);
+}
+
+.mobile-nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.mobile-nav-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-blue);
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.mobile-nav-toggle.is-active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.mobile-nav-toggle.is-active span:nth-child(2) {
+    opacity: 0;
+}
+.mobile-nav-toggle.is-active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* 3. Hero Section */
+.hero {
+    background-color: var(--light-gray);
+    padding: 5rem 0;
+}
+
+.hero .container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-content .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-light);
+}
+
+.hero-credentials {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.hero-credentials span {
+    font-style: italic;
+    color: var(--primary-blue);
+}
+
+.hero-image {
+    flex: 0 0 40%;
+    text-align: center;
+}
+
+.hero-image img {
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    max-width: 350px;
+}
+
+/* 4. Trust Indicators */
+.trust-indicators {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 3rem 0;
+}
+
+.trust-indicators .container {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.trust-indicators h3 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* 5. Services Overview */
+.services-overview {
+    background: var(--white);
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.service-item {
+    text-align: center;
+    padding: 2rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.service-item:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    transform: translateY(-5px);
+}
+
+.service-item img {
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+/* 6. Why Choose Us */
+.why-choose-us {
+    background: var(--light-gray);
+}
+
+.why-choose-us .container {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.why-choose-us-image {
+    flex: 1;
+}
+.why-choose-us-image img {
+    border-radius: 8px;
+}
+
+.why-choose-us-content {
+    flex: 1;
+}
+
+.why-choose-us-content ul {
+    list-style: none;
+}
+
+.why-choose-us-content li {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    position: relative;
+}
+
+.why-choose-us-content li::before {
+    content: '✔';
+    color: var(--secondary-blue);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+/* 7. Quick Contact */
+.quick-contact {
+    text-align: center;
+}
+
+.contact-info {
+    margin: 1.5rem 0;
+    font-size: 1.1rem;
+}
+
+.map-placeholder {
+    height: 300px;
+    background-color: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+/* 8. Footer */
+.main-footer {
+    background-color: var(--text-dark);
+    color: var(--white);
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.footer-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.footer-nav li {
+    margin: 0 1rem;
+}
+
+.footer-nav a {
+    color: var(--white);
+}
+
+.footer-info {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* 9. Responsive Design */
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 1.8rem; }
+    section { padding: 3rem 0; }
+
+    .mobile-nav-toggle { display: block; }
+
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .main-nav.active {
+        display: block;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+    }
+
+    .nav-links li {
+        margin: 1rem 0;
+        margin-left: 0;
+    }
+    
+    .hero .container, .why-choose-us .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content {
+        order: 2;
+    }
+    .hero-image {
+        order: 1;
+        margin-bottom: 2rem;
+    }
+
+    .trust-indicators .container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+/* 10. About Page Styles */
+.page-hero {
+    background-color: var(--light-gray);
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.page-hero h1 {
+    font-size: 2.5rem;
+    color: var(--primary-blue);
+}
+
+.page-hero .subtitle {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+}
+
+.about-content {
+    padding-top: 4rem;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.about-image img {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.credentials, .research-section {
+    margin-bottom: 3rem;
+}
+
+.credentials h2, .research-section h2 {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.credentials ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.credentials li {
+    background: var(--light-gray);
+    padding: 1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.credentials .icon-award {
+    /* Placeholder for icon */
+    margin-right: 10px;
+    font-style: normal;
+}
+
+/* Add checkmark before credentials list items */
+.credentials li::before {
+    content: '🏆'; /* Using an emoji as a placeholder icon */
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 992px) {
+    .credentials ul {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+/* 11. Services Page Styles */
+
+.services-list {
+    padding-bottom: 4rem;
+}
+
+.service-grid-full {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    background: var(--white);
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.service-card:hover {
+    box-shadow: 0 10px 20px rgba(30, 58, 138, 0.1);
+    transform: translateY(-5px);
+}
+
+.service-card h3 {
+    color: var(--primary-blue);
+    margin-bottom: 1rem;
+}
+
+.service-card p {
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+    color: var(--text-light);
+}
+
+.service-card .learn-more {
+    font-weight: 600;
+    color: var(--secondary-blue);
+    align-self: flex-start;
+}
+
+/* 12. Condition Detail Page Styles */
+.condition-detail {
+    padding-bottom: 4rem;
+}
+
+.condition-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.condition-content h2 {
+    text-align: left;
+    color: var(--primary-blue);
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.condition-content p, .condition-content li {
+    color: var(--text-dark);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.condition-content ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.condition-content li {
+    margin-bottom: 0.5rem;
+}
+
+.condition-content .btn {
+    margin-top: 2rem;
+}
+
+/* 13. Technology Page Styles */
+.technology-list {
+    padding-bottom: 4rem;
+}
+
+.tech-item {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.tech-item.reverse {
+    flex-direction: row-reverse;
+}
+
+.tech-image {
+    flex: 1;
+    max-width: 400px;
+}
+
+.tech-image img {
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.tech-description {
+    flex: 1;
+}
+
+.tech-description h3 {
+    color: var(--primary-blue);
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .tech-item, .tech-item.reverse {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* 14. Patient Education Page Styles */
+.education-section {
+    margin-bottom: 4rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.education-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--primary-blue);
+}
+
+.faq-accordion details {
+    border: 1px solid #e5e7eb;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.faq-accordion summary {
+    padding: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    list-style: none; /* Remove default marker */
+}
+
+.faq-accordion summary::-webkit-details-marker {
+    display: none; /* Hide for Chrome/Safari */
+}
+
+.faq-accordion summary::after {
+    content: '+';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    transition: transform 0.2s;
+}
+
+.faq-accordion details[open] summary::after {
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.faq-accordion details p {
+    padding: 0 1rem 1rem;
+    line-height: 1.7;
+    color: var(--text-light);
+}
+
+.post-op-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.post-op-list li {
+    background: var(--light-gray);
+    padding: 1rem 1rem 1rem 2.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    position: relative;
+}
+
+.post-op-list li::before {
+    content: '✓';
+    color: var(--secondary-blue);
+    font-weight: bold;
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+}
+
+.lightbox-close:hover {
+    color: var(--light-gray);
+}
+
+/* 16. Contact Page Styles */
+.contact-section {
+    padding-bottom: 4rem;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+.clinic-location {
+    background: var(--light-gray);
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.clinic-location h3 {
+    color: var(--primary-blue);
+    margin-bottom: 1rem;
+}
+
+.clinic-location p {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+}
+
+.contact-map .map-placeholder {
+    height: 250px;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}

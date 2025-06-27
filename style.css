@@ -533,9 +533,49 @@ h2 {
 }
 
 .service-details small {
-    color: var(--secondary-color);
-    font-weight: 600;
+    color: var(--grey-font-color);
     font-size: 0.85rem;
+}
+
+/* New styles for the services summary on the homepage */
+.services-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.summary-card {
+    background: #ffffff;
+    padding: 2.5rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid var(--accent-color);
+}
+
+.summary-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+.summary-card .icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+
+.summary-card h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: var(--primary-color);
+}
+
+.summary-card p {
+    font-size: 1rem;
+    color: var(--grey-font-color);
 }
 
 /* ------------------- */
@@ -575,14 +615,44 @@ h2 {
 .tech-category:nth-of-type(3) h3::before { content: '⚡'; }
 .tech-category:nth-of-type(4) h3::before { content: '🏥'; }
 
+.tech-list {
+    max-height: 450px;
+    overflow-y: auto;
+    padding-right: 10px; /* Space for scrollbar */
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+/* Custom Scrollbar for Webkit browsers */
+.tech-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.tech-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.tech-list::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+.tech-list::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+
 .tech-item {
-    padding: 15px 0;
-    border-bottom: 1px solid #e9ecef;
-    display: flex;
-    flex-direction: column;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-bottom: none;
 }
 
 .tech-item:last-child {
+    margin-bottom: 0;
     border-bottom: none;
 }
 
@@ -2061,12 +2131,11 @@ h2 {
         width: fit-content;
     }
     .hero-content .clinic-tour-button {
-        margin-top: 15px; /* Add space between buttons on mobile */
-        margin-left: auto; /* Ensure it's centered like the other button */
+        margin-top: 1rem;
     }
     .video-modal-content {
-        margin: 10% auto; /* More margin for smaller screens */
-        width: 90%;
+        padding: 1rem;
+        width: 95%;
     }
 }
 
@@ -2137,8 +2206,8 @@ h2 {
 
 /* Research Read More Button Styling */
 .research-read-more {
-    margin-top: 15px; /* Add some space above the button */
-    display: inline-block; /* Ensure it behaves as a block for margin */
+    display: inline-block;
+    margin-top: 1rem;
 }
 
 /* Associate Doctor Section */
@@ -2359,4 +2428,122 @@ h2 {
     color: #bbb;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* New Blockquote Style for Doctor's Message */
+.doctors-message {
+    background-color: #f8f9fa;
+    border-left: 5px solid var(--secondary-color);
+    margin: 2rem 0;
+    padding: 1.5rem 2rem;
+    font-style: italic;
+    color: var(--grey-font-color);
+}
+
+.doctors-message p {
+    margin-bottom: 1rem;
+}
+
+.doctors-message p:last-child {
+    margin-bottom: 0;
+}
+
+.doctors-message cite {
+    display: block;
+    text-align: right;
+    margin-top: 15px;
+    font-style: normal;
+    font-weight: bold;
+}
+
+/* ------------------- */
+/* Internal Page Headers */
+/* ------------------- */
+.page-header-section {
+    padding: 120px 20px;
+    text-align: center;
+    color: var(--light-font-color);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.page-header-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 77, 104, 0.7);
+    z-index: 1;
+}
+
+.page-header-content {
+    position: relative;
+    z-index: 2;
+}
+
+.page-header-section h1 {
+    font-size: 3rem;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.page-header-section p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+}
+
+/* ------------------- */
+/* Brochure List Styles */
+/* ------------------- */
+.brochure-list {
+    margin-top: 40px;
+}
+
+.brochure-list ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.brochure-list li {
+    background-color: #ffffff;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    border: 1px solid #e9ecef;
+}
+
+.brochure-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(10, 77, 104, 0.15);
+}
+
+.brochure-list a {
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.brochure-list a::before {
+    content: '📄'; /* PDF icon */
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.brochure-list a:hover {
+    color: var(--secondary-color);
 }

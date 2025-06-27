@@ -274,7 +274,35 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     observeElements(); // Call it to initialize
 
-}); // End of DOMContentLoaded
+    // Lightbox functionality for patient education page
+    const lightboxModal = document.getElementById('lightbox-modal');
+    if (lightboxModal) {
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
+        const closeBtn = document.querySelector('.lightbox-close');
+
+        lightboxTriggers.forEach(trigger => {
+            trigger.addEventListener('click', function(e) {
+                e.preventDefault();
+                const imgSrc = this.getAttribute('href');
+                lightboxImage.setAttribute('src', imgSrc);
+                lightboxModal.classList.add('active');
+            });
+        });
+
+        function closeModal() {
+            lightboxModal.classList.remove('active');
+            lightboxImage.setAttribute('src', ''); 
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        lightboxModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    }
+});
 
 // Simple lightbox modal for gallery images (defined outside DOMContentLoaded)
 function showImageModal(src, title, description) {

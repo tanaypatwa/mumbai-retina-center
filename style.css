@@ -533,9 +533,49 @@ h2 {
 }
 
 .service-details small {
-    color: var(--secondary-color);
-    font-weight: 600;
+    color: var(--grey-font-color);
     font-size: 0.85rem;
+}
+
+/* New styles for the services summary on the homepage */
+.services-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.summary-card {
+    background: #ffffff;
+    padding: 2.5rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid var(--accent-color);
+}
+
+.summary-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+.summary-card .icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+
+.summary-card h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: var(--primary-color);
+}
+
+.summary-card p {
+    font-size: 1rem;
+    color: var(--grey-font-color);
 }
 
 /* ------------------- */
@@ -575,14 +615,44 @@ h2 {
 .tech-category:nth-of-type(3) h3::before { content: '⚡'; }
 .tech-category:nth-of-type(4) h3::before { content: '🏥'; }
 
+.tech-list {
+    max-height: 450px;
+    overflow-y: auto;
+    padding-right: 10px; /* Space for scrollbar */
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+/* Custom Scrollbar for Webkit browsers */
+.tech-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.tech-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.tech-list::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+.tech-list::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+
 .tech-item {
-    padding: 15px 0;
-    border-bottom: 1px solid #e9ecef;
-    display: flex;
-    flex-direction: column;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-bottom: none;
 }
 
 .tech-item:last-child {
+    margin-bottom: 0;
     border-bottom: none;
 }
 
@@ -713,6 +783,16 @@ h2 {
 /* ------------------- */
 .education-section {
     background-color: var(--light-bg-color);
+    text-align: center;
+}
+
+.education-summary {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.education-summary p {
+    margin-bottom: 2rem;
 }
 
 .education-grid {
@@ -2008,4 +2088,462 @@ h2 {
     min-height: 450px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-} 
+}
+
+/* Clinic Tour Button & Modal Styles */
+.clinic-tour-button {
+    margin-left: 15px; /* Space between buttons */
+}
+
+.video-modal-content {
+    max-width: 900px; /* Wider for video */
+    padding-bottom: 20px; /* Adjust padding for video aspect ratio */
+}
+
+.video-modal-content h2 {
+    margin-bottom: 20px;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    border-radius: 8px; /* Optional: if you want rounded corners for the video iframe */
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    .hero-content .cta-button,
+    .hero-content .clinic-tour-button {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+    }
+    .hero-content .clinic-tour-button {
+        margin-top: 1rem;
+    }
+    .video-modal-content {
+        padding: 1rem;
+        width: 95%;
+    }
+}
+
+/* Doctor's Message Section */
+.doctors-message-section {
+    background-color: var(--light-bg-color); /* Or #ffffff if preferred */
+    padding: 60px 20px; /* Standard section padding */
+}
+
+.doctors-message-section .container {
+    max-width: 900px; /* Optimal width for text content */
+    margin: 0 auto;
+    text-align: left; /* Align text to the left for readability */
+}
+
+.doctors-message-section h2 {
+    text-align: center; /* Center the main title of the section */
+    margin-bottom: 40px; /* Space below the title */
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.doctors-message-content {
+    background-color: #ffffff; /* White background for the message block */
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+    border: 1px solid #e9ecef;
+}
+
+.doctors-message-content p {
+    margin-bottom: 1.2em; /* Space between paragraphs */
+    line-height: 1.7;
+    color: var(--grey-font-color);
+    font-size: 1.05rem;
+}
+
+.doctors-message-content p:first-child {
+    font-weight: bold; /* "Dear Human," can be bold */
+    color: var(--primary-color);
+}
+
+.doctors-message-content p:nth-last-child(2) { /* Targeting "Our Motto" paragraph */
+    font-style: italic;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--accent-color);
+    text-align: center;
+    color: var(--secondary-color);
+}
+
+
+@media (max-width: 768px) {
+    .doctors-message-section {
+        padding: 40px 20px;
+    }
+    .doctors-message-section h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    .doctors-message-content {
+        padding: 25px 20px;
+    }
+    .doctors-message-content p {
+        font-size: 1rem;
+    }
+}
+
+/* Research Read More Button Styling */
+.research-read-more {
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+/* Associate Doctor Section */
+.associate-doctor-section {
+    background-color: #ffffff; /* Or var(--light-bg-color) */
+    padding: 60px 20px;
+}
+
+.associate-doctor-section .container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.associate-doctor-section .section-title {
+    margin-bottom: 50px;
+}
+
+.associate-container {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    gap: 40px;
+    padding: 30px;
+    background-color: var(--light-bg-color); /* Card-like background */
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+    border: 1px solid #e9ecef;
+}
+
+.associate-photo-placeholder {
+    flex: 0 0 250px; /* Fixed width for photo area */
+    height: 300px; /* Fixed height */
+    background-color: #e0e0e0; /* Placeholder color */
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: #777;
+    text-align: center;
+    border: 2px dashed #ccc;
+}
+.associate-photo-placeholder::after {
+    content: "Photo Coming Soon";
+}
+
+
+.associate-bio-placeholder {
+    flex: 1; /* Takes remaining space */
+    text-align: left;
+}
+
+.associate-bio-placeholder h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.associate-bio-placeholder .subtitle {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.associate-bio-placeholder p {
+    margin-bottom: 15px;
+    line-height: 1.7;
+    color: var(--grey-font-color);
+}
+
+.associate-bio-placeholder p em { /* For the "Bio and information loading..." text */
+    color: #888;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .associate-container {
+        flex-direction: column;
+        align-items: center; /* Center items when stacked */
+        text-align: center;
+    }
+    .associate-photo-placeholder {
+        width: 200px; /* Adjust for smaller screens */
+        height: 240px;
+        margin-bottom: 20px;
+    }
+    .associate-bio-placeholder {
+        text-align: center; /* Center text for stacked layout */
+    }
+    .associate-bio-placeholder h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Footer Social Links Enhancement */
+.footer-social {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between icons/links */
+    margin-top: 15px;
+}
+
+.social-icon {
+    /* Existing styles should be fine, ensure it's display: inline-flex or flex for alignment if not already */
+    display: inline-flex; /* Or flex */
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; /* Ensure no underline */
+}
+
+.google-reviews-link {
+    color: #a5d8ff; /* Match other footer link colors */
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    border-radius: 20px; /* Pill shape */
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.google-reviews-link:hover {
+    background-color: var(--accent-color);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.google-reviews-link .stars { /* If you choose to wrap stars in a span */
+    color: #ffc107; /* Gold color for stars */
+    margin-left: 5px;
+}
+
+/* Education Hub Page */
+.education-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.education-resource-item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.education-resource-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.education-resource-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+}
+
+.education-resource-item h4 {
+    font-size: 1.1rem;
+    color: #333;
+    margin: 1rem 0 0.5rem;
+    padding: 0 1rem 1rem;
+    margin-bottom: 0;
+}
+
+.education-resource-item p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+    padding: 0 1rem 1rem;
+    margin-bottom: 0;
+}
+
+/* Lightbox Modal */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 80vh;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* New Blockquote Style for Doctor's Message */
+.doctors-message {
+    background-color: #f8f9fa;
+    border-left: 5px solid var(--secondary-color);
+    margin: 2rem 0;
+    padding: 1.5rem 2rem;
+    font-style: italic;
+    color: var(--grey-font-color);
+}
+
+.doctors-message p {
+    margin-bottom: 1rem;
+}
+
+.doctors-message p:last-child {
+    margin-bottom: 0;
+}
+
+.doctors-message cite {
+    display: block;
+    text-align: right;
+    margin-top: 15px;
+    font-style: normal;
+    font-weight: bold;
+}
+
+/* ------------------- */
+/* Internal Page Headers */
+/* ------------------- */
+.page-header-section {
+    padding: 120px 20px;
+    text-align: center;
+    color: var(--light-font-color);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.page-header-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 77, 104, 0.7);
+    z-index: 1;
+}
+
+.page-header-content {
+    position: relative;
+    z-index: 2;
+}
+
+.page-header-section h1 {
+    font-size: 3rem;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.page-header-section p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+}
+
+/* ------------------- */
+/* Brochure List Styles */
+/* ------------------- */
+.brochure-list {
+    margin-top: 40px;
+}
+
+.brochure-list ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.brochure-list li {
+    background-color: #ffffff;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    border: 1px solid #e9ecef;
+}
+
+.brochure-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(10, 77, 104, 0.15);
+}
+
+.brochure-list a {
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.brochure-list a::before {
+    content: '📄'; /* PDF icon */
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.brochure-list a:hover {
+    color: var(--secondary-color);
+}

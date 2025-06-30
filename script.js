@@ -87,26 +87,37 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Accordion Button (for sections like "Retinal Conditions")
-    const accordionButtons = document.querySelectorAll('.accordion-button');
-    accordionButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const currentlyActive = document.querySelector('.accordion-button.active');
-            if (currentlyActive && currentlyActive !== button) {
-                currentlyActive.classList.remove('active');
-                currentlyActive.nextElementSibling.style.maxHeight = null;
-                 currentlyActive.nextElementSibling.style.padding = '0 25px';
-            }
+    // Accordion Button (generalized for multiple accordion groups)
+    const accordionContainers = document.querySelectorAll('.accordion'); // Get all accordion containers
 
-            button.classList.toggle('active');
-            const panel = button.nextElementSibling;
-            if (button.classList.contains('active')) {
-                panel.style.padding = '25px';
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            } else {
-                panel.style.maxHeight = null;
-                panel.style.padding = '0 25px';
-            }
+    accordionContainers.forEach(container => {
+        const buttons = container.querySelectorAll('.accordion-button');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Find currently active button *within this specific accordion container*
+                const currentlyActive = container.querySelector('.accordion-button.active');
+
+                if (currentlyActive && currentlyActive !== button) {
+                    currentlyActive.classList.remove('active');
+                    const activePanel = currentlyActive.nextElementSibling;
+                    if (activePanel) {
+                        activePanel.style.maxHeight = null;
+                        activePanel.style.padding = '0 25px'; // Keep original padding reset logic
+                    }
+                }
+
+                button.classList.toggle('active');
+                const panel = button.nextElementSibling;
+                if (panel) {
+                    if (button.classList.contains('active')) {
+                        panel.style.padding = '25px'; // Keep original padding logic
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    } else {
+                        panel.style.maxHeight = null;
+                        panel.style.padding = '0 25px'; // Keep original padding reset logic
+                    }
+                }
+            });
         });
     });
 

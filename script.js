@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function () {
         anchor.addEventListener('click', function (e) {
             const hrefAttribute = this.getAttribute('href');
             // Exclude buttons/links that only trigger modals or other JS actions
-            if (hrefAttribute.length > 1 && hrefAttribute !== '#clinic-tour' && !this.classList.contains('dropdown-toggle')) {
+            if (hrefAttribute.length > 1 && !this.classList.contains('dropdown-toggle')) {
                 const targetElement = document.querySelector(hrefAttribute);
                 if (targetElement) {
                     e.preventDefault();
@@ -219,38 +219,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-
-    // Clinic Tour Modal
-    const clinicTourModal = document.getElementById('clinicTourModal');
-    const clinicTourBtn = document.getElementById('clinicTourBtn');
-    const clinicTourCloseBtn = document.querySelector('#clinicTourModal .clinic-tour-close');
-    const clinicVideoIframe = clinicTourModal ? clinicTourModal.querySelector('iframe') : null;
-
-    if (clinicVideoIframe) {
-        const originalVideoSrc = clinicVideoIframe.src;
-
-        if (clinicTourModal && clinicTourBtn && clinicTourCloseBtn) {
-            clinicTourBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                clinicTourModal.style.display = 'block';
-                if (clinicVideoIframe.src !== originalVideoSrc) {
-                    clinicVideoIframe.src = originalVideoSrc;
-                }
-            });
-
-            const closeClinicModal = function() {
-                clinicTourModal.style.display = 'none';
-                clinicVideoIframe.src = ""; // Stop video
-            };
-
-            clinicTourCloseBtn.addEventListener('click', closeClinicModal);
-            window.addEventListener('click', function(event) {
-                if (event.target == clinicTourModal) {
-                    closeClinicModal();
-                }
-            });
-        }
-    }
 
     // Enhanced intersection observer for animations (like post-op and gallery items)
     const observeElements = () => {

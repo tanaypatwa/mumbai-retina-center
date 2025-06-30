@@ -1,0 +1,206 @@
+/* General styles for condition pages */
+body.condition-page-body { /* Will add this class to body in actual condition pages */
+    background-color: #f8f9fa; /* Light grey background, similar to existing condition pages but can be adjusted */
+    font-family: 'Lato', sans-serif;
+}
+
+.condition-page-main {
+    max-width: 1200px; /* Max width for the content area */
+    margin: 0 auto; /* Center the content */
+    padding: 20px;
+    padding-top: 80px; /* Add padding to account for fixed header if any */
+}
+
+/* Breadcrumbs */
+.breadcrumb-container {
+    padding: 15px 0;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 0.9em;
+}
+
+.breadcrumb-container p {
+    margin: 0;
+    color: var(--grey-font-color);
+}
+
+.breadcrumb-container a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.breadcrumb-container a:hover {
+    text-decoration: underline;
+}
+
+/* Two-column layout */
+.condition-layout-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    gap: 30px; /* Space between content and sidebar */
+}
+
+.condition-content {
+    flex: 3; /* Main content takes up more space */
+    min-width: 300px; /* Minimum width before wrapping/stacking */
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+}
+
+.condition-content h1 {
+    color: var(--primary-color); /* From main style.css */
+    font-size: 2.5em;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+}
+
+.condition-content h2 {
+    color: var(--secondary-color); /* From main style.css */
+    font-size: 1.8em;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.condition-content h3 {
+    color: var(--primary-color);
+    font-size: 1.5em;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.condition-content p,
+.condition-content ul,
+.condition-content ol {
+    color: var(--text-color); /* Assuming var(--text-color) is defined in main style.css */
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.condition-content ul, .condition-content ol {
+    padding-left: 20px;
+}
+
+.condition-content li {
+    margin-bottom: 8px;
+}
+
+.condition-content strong {
+    color: var(--primary-color);
+}
+
+.condition-sidebar {
+    flex: 1; /* Sidebar takes less space */
+    min-width: 280px; /* Minimum width */
+}
+
+.sidebar-widget {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    margin-bottom: 25px;
+}
+
+.sidebar-widget h3 {
+    color: var(--secondary-color);
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.sidebar-widget .cta-button { /* For "Book a Consultation" */
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px 15px;
+    font-size: 1.1em;
+    margin-bottom: 10px; /* In case other items are added to this specific widget */
+}
+
+#other-conditions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#other-conditions-list li {
+    margin-bottom: 12px;
+}
+
+#other-conditions-list li a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+#other-conditions-list li a:hover,
+#other-conditions-list li a.active { /* Style for current page's link if we implement that */
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .condition-content h1 {
+        font-size: 2.2em;
+    }
+    .condition-content h2 {
+        font-size: 1.6em;
+    }
+}
+
+@media (max-width: 768px) {
+    .condition-layout-container {
+        flex-direction: column; /* Stack content and sidebar */
+    }
+
+    .condition-page-main {
+        padding-top: 70px; /* Adjust for potentially smaller fixed header */
+    }
+
+    .condition-content h1 {
+        font-size: 2em;
+    }
+    .condition-content h2 {
+        font-size: 1.5em;
+    }
+    .condition-sidebar {
+        margin-top: 20px; /* Add some space when stacked */
+    }
+}
+
+@media (max-width: 480px) {
+    .condition-page-main {
+        padding: 15px;
+        padding-top: 60px;
+    }
+    .condition-content {
+        padding: 20px;
+    }
+    .condition-content h1 {
+        font-size: 1.8em;
+    }
+    .sidebar-widget {
+        padding: 20px;
+    }
+}
+
+/* Ensure main header and footer styles from style.css apply correctly */
+/* The template uses ../style.css, so variables like --primary-color should be available */
+
+/* If the main header is fixed and overlaps content */
+body {
+    /* padding-top: 80px; /* Adjust this value based on the actual height of the fixed header */
+    /* This might be better handled by adding a class to body when header is fixed, or within main style.css */
+}
+
+/* Ensure footer is full width */
+.main-footer {
+     margin-top: 40px; /* Add some space before footer */
+}

@@ -283,6 +283,137 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+// Function to load header and footer
+function loadHeaderFooter() {
+    const headerPlaceholder = document.getElementById('header-placeholder');
+    const footerPlaceholder = document.getElementById('footer-placeholder');
+    const currentPagePath = window.location.pathname;
+    const isRoot = currentPagePath.endsWith('/') || currentPagePath.endsWith('index.html') || !currentPagePath.substring(currentPagePath.lastIndexOf('/') + 1).includes('.');
+    const depth = currentPagePath.split('/').length - (isRoot ? 2 : 3); // Adjust depth calculation
+
+    // Determine base path for assets and components
+    let basePath = '';
+    if (depth > 0) {
+        basePath = '../'.repeat(depth);
+    }
+
+
+    if (headerPlaceholder) {
+        fetch(basePath + '_header.html')
+            .then(response => response.text())
+            .then(data => {
+                // Adjust paths in the fetched HTML
+                const adjustedData = data.replace(/assets\//g, basePath + 'assets/')
+                                         .replace(/href="([^"#]+)\.html"/g, (match, p1) => `href="${basePath}${p1}.html"`)
+                                         .replace(/href="#([^"]+)"/g, (match, p1) => {
+                                             // For internal page links like #home, #about, ensure they point to index.html if not on index page
+                                             if (!isRoot) {
+                                                 return `href="${basePath}index.html#${p1}"`;
+                                             }
+                                             return match; // Keep as is for index.html
+                                         });
+                headerPlaceholder.innerHTML = adjustedData;
+                // Re-initialize hamburger and dropdowns after header is loaded
+                initializeHeaderInteractions();
+            });
+    }
+
+    if (footerPlaceholder) {
+        fetch(basePath + '_footer.html')
+            .then(response => response.text())
+            .then(data => {
+                const adjustedData = data.replace(/assets\//g, basePath + 'assets/')
+                                         .replace(/href="([^"#]+)\.html"/g, (match, p1) => `href="${basePath}${p1}.html"`)
+                                         .replace(/href="#([^"]+)"/g, (match, p1) => {
+                                             if (!isRoot) {
+                                                 return `href="${basePath}index.html#${p1}"`;
+                                             }
+                                             return match;
+                                         });
+                footerPlaceholder.innerHTML = adjustedData;
+            });
+    }
+}
+
+// Call loadHeaderFooter when the DOM is ready
+document.addEventListener('DOMContentLoaded', loadHeaderFooter);
+
+// Encapsulate header-specific initializations
+function initializeHeaderInteractions() {
+    const hamburger = document.querySelector('.hamburger-menu');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (hamburger && navLinks) {
+        let isAnimating = false;
+        hamburger.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (isAnimating) return;
+            isAnimating = true;
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            setTimeout(() => { isAnimating = false; }, 400);
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (!e.target.closest('.dropdown-toggle')) {
+                    if (navLinks.classList.contains('active')) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    }
+                    navLinks.querySelectorAll('.dropdown.active').forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
+                }
+            });
+        });
+    }
+
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    dropdownToggles.forEach(toggle => {
+        ['click', 'touchstart'].forEach(eventType => {
+            toggle.addEventListener(eventType, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (window.matchMedia('(max-width: 1024px)').matches && navLinks && navLinks.classList.contains('active')) {
+                    toggle.parentElement.classList.toggle('active');
+                }
+            });
+        });
+    });
+
+    // Smooth scrolling for internal anchor links (re-attach if header is dynamic)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const hrefAttribute = this.getAttribute('href');
+            if (hrefAttribute.length > 1 && !this.classList.contains('dropdown-toggle')) {
+                 // Check if on a different page and link is to an ID on index.html
+                const isIndexLink = hrefAttribute.startsWith('#') && window.location.pathname !== '/' && !window.location.pathname.endsWith('index.html');
+                if (isIndexLink) {
+                    // This case is handled by the path adjustment in loadHeaderFooter.
+                    // No special scroll behavior needed here if the link itself is correct.
+                    // If direct navigation is preferred: window.location.href = basePath + 'index.html' + hrefAttribute; return;
+                } else {
+                    const targetElement = document.querySelector(hrefAttribute);
+                    if (targetElement) {
+                        e.preventDefault();
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                        if (navLinks && navLinks.classList.contains('active')) {
+                            hamburger.classList.remove('active');
+                            navLinks.classList.remove('active');
+                            navLinks.querySelectorAll('.dropdown.active').forEach(dropdown => {
+                                dropdown.classList.remove('active');
+                            });
+                        }
+                    }
+                }
+            }
+        });
+    });
+}
+
+
 // Simple lightbox modal for gallery images (defined outside DOMContentLoaded)
 function showImageModal(src, title, description) {
     const existingModal = document.querySelector('.image-modal');

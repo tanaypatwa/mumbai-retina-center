@@ -285,54 +285,116 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Function to load header and footer
 function loadHeaderFooter() {
-    const headerPlaceholder = document.getElementById('header-placeholder');
-    const footerPlaceholder = document.getElementById('footer-placeholder');
     const currentPagePath = window.location.pathname;
+    // Simplified isRoot check: ends with / or index.html or has no extension in the last segment
     const isRoot = currentPagePath.endsWith('/') || currentPagePath.endsWith('index.html') || !currentPagePath.substring(currentPagePath.lastIndexOf('/') + 1).includes('.');
-    const depth = currentPagePath.split('/').length - (isRoot ? 2 : 3); // Adjust depth calculation
+
+    // Calculate depth based on segments. Assumes script.js is at the root.
+    // Example: / => 0 segments after host
+    // /index.html => 1 segment
+    // /conditions/ => 1 segment (trailing slash means it's like a directory access)
+    // /conditions/foo.html => 2 segments
+    let pathSegments = currentPagePath.split('/').filter(segment => segment.length > 0);
+    if (currentPagePath.endsWith('/')) { // for paths like /conditions/
+        // effectively one less deep than if it were a file in that dir.
+        // but our base path logic will handle this by not adding ../ for the last segment if it's empty
+    } else if (!currentPagePath.substring(currentPagePath.lastIndexOf('/') + 1).includes('.')) {
+        // if path is like /about or /services (no extension), treat as root or one level
+        // this case is tricky without knowing server config. Assume it acts like index.html at that path.
+    }
+
 
     // Determine base path for assets and components
+    // If script.js is at root, and HTML is in 'conditions/', then basePath needs to be '../'
+    // If HTML is at root, basePath is ''
+    // If HTML is at 'conditions/subdir/', basePath needs to be '../../'
+
+    let depth = 0;
+    const pathParts = window.location.pathname.split('/').filter(part => part !== '');
+    // If the last part does not contain a '.', it's likely a directory or a clean URL.
+    // If it's index.html or empty (root), depth is 0 relative to script.js at root.
+    // If it's e.g., /conditions/page.html, pathParts is ['conditions', 'page.html']. Depth should be 1.
+    // If it's e.g., /conditions/, pathParts is ['conditions']. Depth should be 1.
+    if (pathParts.length > 0) {
+        const lastPart = pathParts[pathParts.length - 1];
+        if (lastPart !== 'index.html' && lastPart.includes('.')) { // It's a file not at root
+            depth = pathParts.length - 1;
+        } else if (!lastPart.includes('.')) { // It's a directory like /conditions/ or a clean URL /conditions
+             depth = pathParts.length;
+             // Special case for root paths that are not just "/" e.g. /patient-education (no .html)
+             // these should be treated as depth 0 if they are actual files at root.
+             // This logic is hard without knowing server rewrite rules.
+             // For now, assume if no extension, and not 'index.html', it's like a directory.
+             // Let's refine: if it's not index.html and has no extension, it's like a file at that depth.
+             // So, /patient-education is like /patient-education.html, depth 0.
+             // /conditions/retinal-detachment is like /conditions/retinal-detachment.html, depth 1.
+             const knownRootFilesWithoutExtensions = ['patient-education', 'services', 'technology'];
+             if (pathParts.length === 1 && knownRootFilesWithoutExtensions.includes(lastPart)) {
+                 depth = 0;
+             }
+
+        }
+    }
+
+
     let basePath = '';
     if (depth > 0) {
         basePath = '../'.repeat(depth);
     }
 
+    // Create header element
+    let headerElement = document.createElement('div');
+    headerElement.setAttribute('id', 'main-header-wrapper'); // Assign an ID for potential styling/selection
+    document.body.prepend(headerElement);
 
-    if (headerPlaceholder) {
-        fetch(basePath + '_header.html')
-            .then(response => response.text())
-            .then(data => {
-                // Adjust paths in the fetched HTML
-                const adjustedData = data.replace(/assets\//g, basePath + 'assets/')
-                                         .replace(/href="([^"#]+)\.html"/g, (match, p1) => `href="${basePath}${p1}.html"`)
-                                         .replace(/href="#([^"]+)"/g, (match, p1) => {
-                                             // For internal page links like #home, #about, ensure they point to index.html if not on index page
-                                             if (!isRoot) {
-                                                 return `href="${basePath}index.html#${p1}"`;
-                                             }
-                                             return match; // Keep as is for index.html
-                                         });
-                headerPlaceholder.innerHTML = adjustedData;
-                // Re-initialize hamburger and dropdowns after header is loaded
-                initializeHeaderInteractions();
-            });
-    }
+    fetch(basePath + '_header.html')
+        .then(response => {
+            if (!response.ok) throw new Error(`Failed to load _header.html: ${response.statusText}`);
+            return response.text();
+        })
+        .then(data => {
+            const adjustedData = data
+                .replace(/assets\//g, basePath + 'assets/')
+                .replace(/href="((?!https?:\/\/)[^"#]+\.html|[^"#]*#)/g, (match, p1) => {
+                    // For href="page.html" or href="page.html#section" or href="#section"
+                    if (p1.startsWith('#')) { // Same-page anchor like href="#about"
+                        return isRoot ? match : `href="${basePath}index.html${p1}"`;
+                    } else if (p1.includes('.html#')) { // Cross-page anchor like href="services.html#detail"
+                        return `href="${basePath}${p1}"`;
+                    } else { // Regular page link like href="services.html"
+                        return `href="${basePath}${p1}"`;
+                    }
+                });
+            headerElement.innerHTML = adjustedData;
+            initializeHeaderInteractions(); // Crucial: re-run JS for dynamic elements in header
+        })
+        .catch(error => console.error('Error loading header:', error));
 
-    if (footerPlaceholder) {
-        fetch(basePath + '_footer.html')
-            .then(response => response.text())
-            .then(data => {
-                const adjustedData = data.replace(/assets\//g, basePath + 'assets/')
-                                         .replace(/href="([^"#]+)\.html"/g, (match, p1) => `href="${basePath}${p1}.html"`)
-                                         .replace(/href="#([^"]+)"/g, (match, p1) => {
-                                             if (!isRoot) {
-                                                 return `href="${basePath}index.html#${p1}"`;
-                                             }
-                                             return match;
-                                         });
-                footerPlaceholder.innerHTML = adjustedData;
-            });
-    }
+    // Create footer element
+    let footerElement = document.createElement('div');
+    footerElement.setAttribute('id', 'main-footer-wrapper'); // Assign an ID
+    document.body.appendChild(footerElement);
+
+    fetch(basePath + '_footer.html')
+        .then(response => {
+            if (!response.ok) throw new Error(`Failed to load _footer.html: ${response.statusText}`);
+            return response.text();
+        })
+        .then(data => {
+            const adjustedData = data
+                .replace(/assets\//g, basePath + 'assets/')
+                 .replace(/href="((?!https?:\/\/)[^"#]+\.html|[^"#]*#)/g, (match, p1) => {
+                    if (p1.startsWith('#')) {
+                        return isRoot ? match : `href="${basePath}index.html${p1}"`;
+                    } else if (p1.includes('.html#')) {
+                        return `href="${basePath}${p1}"`;
+                    } else {
+                        return `href="${basePath}${p1}"`;
+                    }
+                });
+            footerElement.innerHTML = adjustedData;
+        })
+        .catch(error => console.error('Error loading footer:', error));
 }
 
 // Call loadHeaderFooter when the DOM is ready

@@ -237,6 +237,7 @@ h2 {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     font-weight: 300;
     letter-spacing: -0.02em;
+    white-space: nowrap;
 }
 
 .hero-subtitle {
@@ -1467,9 +1468,19 @@ h2 {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 30px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 220px;
+}
+
+.footer-column.footer-about {
+    flex-basis: 30%;
 }
 
 .footer-column h4 {
@@ -1533,6 +1544,11 @@ h2 {
 .social-icon:hover {
     background-color: var(--accent-color);
     transform: scale(1.1);
+}
+
+.social-icon svg {
+    width: 20px;
+    height: 20px;
 }
 
 .map-container {
@@ -1810,6 +1826,37 @@ h2 {
     .stages-grid, 
     .emergency-signs {
         grid-template-columns: 1fr;
+    }
+
+    /* Horizontal scroll for card sections on mobile */
+    .credentials-grid,
+    #testimonials .testimonials-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        gap: 20px;
+        padding: 20px 20px 30px 20px;
+        margin: 0 -20px;
+    }
+
+    .credentials-grid > .credential-card,
+    #testimonials .testimonials-grid > .testimonial-card {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+    }
+    
+    /* Hide scrollbar for a cleaner look */
+    .credentials-grid::-webkit-scrollbar,
+    #testimonials .testimonials-grid::-webkit-scrollbar {
+        display: none;
+    }
+    .credentials-grid,
+    #testimonials .testimonials-grid {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
     }
 
     .faq-categories {
@@ -2187,6 +2234,30 @@ h2 {
     color: var(--secondary-color);
 }
 
+.doctors-message cite {
+    display: block;
+    text-align: right;
+    margin-top: 20px;
+    font-weight: 600;
+    color: var(--primary-color);
+    font-style: normal;
+}
+
+.motto {
+    background-color: #f0f8ff;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 25px 0;
+    text-align: center;
+    font-style: normal;
+}
+.motto p {
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+.motto p:last-child {
+    margin-bottom: 0;
+}
 
 @media (max-width: 768px) {
     .doctors-message-section {
@@ -2546,4 +2617,56 @@ h2 {
 
 .brochure-list a:hover {
     color: var(--secondary-color);
+}
+
+/* Virtual Tours Section */
+.virtual-tours-section {
+    padding: 4rem 2rem;
+    background-color: #fff;
+    text-align: center;
+}
+
+.tours-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.tour-video {
+    flex: 1;
+    min-width: 300px;
+    max-width: 560px;
+}
+
+.tour-video h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+@media (max-width: 768px) {
+    .tours-container {
+        flex-direction: column;
+        align-items: center;
+    }
 }

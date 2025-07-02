@@ -87,26 +87,37 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Accordion Button (for sections like "Retinal Conditions")
-    const accordionButtons = document.querySelectorAll('.accordion-button');
-    accordionButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const currentlyActive = document.querySelector('.accordion-button.active');
-            if (currentlyActive && currentlyActive !== button) {
-                currentlyActive.classList.remove('active');
-                currentlyActive.nextElementSibling.style.maxHeight = null;
-                 currentlyActive.nextElementSibling.style.padding = '0 25px';
-            }
+    // Accordion Button (generalized for multiple accordion groups)
+    const accordionContainers = document.querySelectorAll('.accordion'); // Get all accordion containers
 
-            button.classList.toggle('active');
-            const panel = button.nextElementSibling;
-            if (button.classList.contains('active')) {
-                panel.style.padding = '25px';
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            } else {
-                panel.style.maxHeight = null;
-                panel.style.padding = '0 25px';
-            }
+    accordionContainers.forEach(container => {
+        const buttons = container.querySelectorAll('.accordion-button');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Find currently active button *within this specific accordion container*
+                const currentlyActive = container.querySelector('.accordion-button.active');
+
+                if (currentlyActive && currentlyActive !== button) {
+                    currentlyActive.classList.remove('active');
+                    const activePanel = currentlyActive.nextElementSibling;
+                    if (activePanel) {
+                        activePanel.style.maxHeight = null;
+                        activePanel.style.padding = '0 25px'; // Keep original padding reset logic
+                    }
+                }
+
+                button.classList.toggle('active');
+                const panel = button.nextElementSibling;
+                if (panel) {
+                    if (button.classList.contains('active')) {
+                        panel.style.padding = '25px'; // Keep original padding logic
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    } else {
+                        panel.style.maxHeight = null;
+                        panel.style.padding = '0 25px'; // Keep original padding reset logic
+                    }
+                }
+            });
         });
     });
 
@@ -202,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function () {
         anchor.addEventListener('click', function (e) {
             const hrefAttribute = this.getAttribute('href');
             // Exclude buttons/links that only trigger modals or other JS actions
-            if (hrefAttribute.length > 1 && hrefAttribute !== '#clinic-tour' && !this.classList.contains('dropdown-toggle')) {
+            if (hrefAttribute.length > 1 && !this.classList.contains('dropdown-toggle')) {
                 const targetElement = document.querySelector(hrefAttribute);
                 if (targetElement) {
                     e.preventDefault();
@@ -219,38 +230,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-
-    // Clinic Tour Modal
-    const clinicTourModal = document.getElementById('clinicTourModal');
-    const clinicTourBtn = document.getElementById('clinicTourBtn');
-    const clinicTourCloseBtn = document.querySelector('#clinicTourModal .clinic-tour-close');
-    const clinicVideoIframe = clinicTourModal ? clinicTourModal.querySelector('iframe') : null;
-
-    if (clinicVideoIframe) {
-        const originalVideoSrc = clinicVideoIframe.src;
-
-        if (clinicTourModal && clinicTourBtn && clinicTourCloseBtn) {
-            clinicTourBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                clinicTourModal.style.display = 'block';
-                if (clinicVideoIframe.src !== originalVideoSrc) {
-                    clinicVideoIframe.src = originalVideoSrc;
-                }
-            });
-
-            const closeClinicModal = function() {
-                clinicTourModal.style.display = 'none';
-                clinicVideoIframe.src = ""; // Stop video
-            };
-
-            clinicTourCloseBtn.addEventListener('click', closeClinicModal);
-            window.addEventListener('click', function(event) {
-                if (event.target == clinicTourModal) {
-                    closeClinicModal();
-                }
-            });
-        }
-    }
 
     // Enhanced intersection observer for animations (like post-op and gallery items)
     const observeElements = () => {
@@ -303,6 +282,83 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+
+// Encapsulate header-specific initializations
+function initializeHeaderInteractions() {
+    const hamburger = document.querySelector('.hamburger-menu');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (hamburger && navLinks) {
+        let isAnimating = false;
+        hamburger.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (isAnimating) return;
+            isAnimating = true;
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            setTimeout(() => { isAnimating = false; }, 400);
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (!e.target.closest('.dropdown-toggle')) {
+                    if (navLinks.classList.contains('active')) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    }
+                    navLinks.querySelectorAll('.dropdown.active').forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
+                }
+            });
+        });
+    }
+
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    dropdownToggles.forEach(toggle => {
+        ['click', 'touchstart'].forEach(eventType => {
+            toggle.addEventListener(eventType, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (window.matchMedia('(max-width: 1024px)').matches && navLinks && navLinks.classList.contains('active')) {
+                    toggle.parentElement.classList.toggle('active');
+                }
+            });
+        });
+    });
+
+    // Smooth scrolling for internal anchor links (re-attach if header is dynamic)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const hrefAttribute = this.getAttribute('href');
+            if (hrefAttribute.length > 1 && !this.classList.contains('dropdown-toggle')) {
+                 // Check if on a different page and link is to an ID on index.html
+                const isIndexLink = hrefAttribute.startsWith('#') && window.location.pathname !== '/' && !window.location.pathname.endsWith('index.html');
+                if (isIndexLink) {
+                    // This case is handled by the path adjustment in loadHeaderFooter.
+                    // No special scroll behavior needed here if the link itself is correct.
+                    // If direct navigation is preferred: window.location.href = basePath + 'index.html' + hrefAttribute; return;
+                } else {
+                    const targetElement = document.querySelector(hrefAttribute);
+                    if (targetElement) {
+                        e.preventDefault();
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                        if (navLinks && navLinks.classList.contains('active')) {
+                            hamburger.classList.remove('active');
+                            navLinks.classList.remove('active');
+                            navLinks.querySelectorAll('.dropdown.active').forEach(dropdown => {
+                                dropdown.classList.remove('active');
+                            });
+                        }
+                    }
+                }
+            }
+        });
+    });
+}
+
 
 // Simple lightbox modal for gallery images (defined outside DOMContentLoaded)
 function showImageModal(src, title, description) {

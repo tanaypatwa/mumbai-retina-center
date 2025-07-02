@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diabetic Retinopathy - Mumbai Retina Centre</title>
-    <meta name="description" content="Learn about Diabetic Retinopathy, its symptoms, causes, and treatment options at Mumbai Retina Centre.">
+    <title>Condition Name - Mumbai Retina Centre</title>
+    <meta name="description" content="Learn about [Condition Name] and its treatment at Mumbai Retina Centre.">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="condition_style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
-<body class="condition-page-body">
+<body>
 <header class="main-header">
         <nav class="main-nav">
             <div class="logo">
@@ -46,33 +46,17 @@
 
     <main class="condition-page-main">
         <div class="breadcrumb-container">
-            <p><a href="../index.html">Home</a> &gt; <a href="../services.html">Services</a> &gt; <span id="breadcrumb-condition-name">Diabetic Retinopathy</span></p>
+            <p><a href="../index.html">Home</a> &gt; <a href="../services.html">Services</a> &gt; <span id="breadcrumb-condition-name">Condition Name</span></p>
         </div>
 
         <div class="condition-layout-container">
             <article class="condition-content">
-                <h1>Diabetic Retinopathy</h1>
-
-        <h2>About Diabetic Retinopathy & Your Eyes</h2>
-        <p>Diabetes is a growing disease in India, and it is estimated that by 2025, India will have the largest number of diabetic individuals in the world. This poses a significant challenge, as vision loss due to diabetes is a major concern. Diabetes can cause diabetic retinopathy, early onset cataracts, glaucoma, and strokes affecting the optic nerve.</p>
-        <p>The high sugar level in the blood weakens the small blood vessels (capillaries) in the retina. This can lead to out-pouchings (microaneurysms), fluid leakage (macular edema), and even the growth of fragile, abnormal new blood vessels (proliferative diabetic retinopathy), which can cause sudden vision loss or retinal detachment.</p>
-
-        <h2>Causes and Symptoms</h2>
-        <p>Unfortunately, diabetic retinopathy often remains asymptomatic in its early stages. As it advances, there may be a slow, progressive visual loss or a sudden loss of vision with floaters due to internal bleeding. The most significant risk factor is the duration of diabetes, followed by poor blood sugar control. Other factors include high blood pressure, high cholesterol, smoking, and pregnancy.</p>
-
-        <h2>Diagnosis</h2>
-        <p>A yearly eye examination is vital for every diabetic patient, even if their vision seems fine. Diagnosis involves a dilated eye exam and may include photography of the retina (Fundus Photography) and a specialized dye test (Fundus Fluorescein Angiography or FFA) to visualize leaking blood vessels and guide treatment.</p>
-
-        <h2>Treatment</h2>
-        <p>While diabetic retinopathy cannot be "cured," its progression can be managed to preserve vision.</p>
-        <ul>
-            <li><strong>Laser Surgery (Photocoagulation):</strong> This is the mainstay of treatment. A laser is used to seal leaking blood vessels in cases of macular edema or to destroy diseased parts of the retina to stop the growth of new, harmful vessels (Pan-Retinal Photocoagulation).</li>
-            <li><strong>Intraocular Injections:</strong> Medications like Anti-VEGF (e.g., Avastin, Lucentis) or steroids (e.g., Kenacort) are injected into the eye. These drugs reduce swelling and prevent the growth of new blood vessels.</li>
-            <li><strong>Vitrectomy Surgery:</strong> If there is significant bleeding into the eye (vitreous hemorrhage) or scar tissue causing retinal detachment, a micro-incision surgery called a vitrectomy is performed to remove the blood and repair the retina.</li>
-        </ul>
-        <p>Timely treatment is critical. Even people with advanced retinopathy have a 90% chance of keeping their vision if they get treatment before the retina is severely damaged.</p>
-
-
+                <!-- {{ CONDITION_TITLE }} will be replaced by the specific condition title -->
+                <h1>{{ CONDITION_TITLE }}</h1>
+                <!-- {{ CONDITION_DETAILS }} will be replaced by the specific condition content -->
+                <div id="condition-details-placeholder">
+                    <p>Loading condition details...</p>
+                </div>
             </article>
 
             <aside class="condition-sidebar">
@@ -82,9 +66,10 @@
                 <div class="sidebar-widget">
                     <h3>Other Conditions</h3>
                     <ul id="other-conditions-list">
+                        <!-- Links will be dynamically populated or manually added -->
                         <li><a href="cataract.html">Cataract</a></li>
                         <li><a href="glaucoma.html">Glaucoma</a></li>
-                        <li><a href="diabetic-retinopathy.html" class="active">Diabetic Retinopathy</a></li>
+                        <li><a href="diabetic-retinopathy.html">Diabetic Retinopathy</a></li>
                         <li><a href="macular-degeneration.html">Macular Degeneration (AMD)</a></li>
                         <li><a href="retinal-detachment.html">Retinal Detachment</a></li>
                         <li><a href="macular-hole.html">Macular Hole</a></li>
@@ -200,4 +185,4 @@
 
     <script src="../script.js"></script>
 </body>
-</html> 
+</html>

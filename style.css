@@ -2668,5 +2668,36 @@ h2 {
     .tours-container {
         flex-direction: column;
         align-items: center;
+        gap: 2rem;
+    }
+    
+    .tour-video {
+        width: 100%;
+        max-width: 100%;
+        min-width: unset;
+    }
+    
+    .tour-video h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .virtual-tours-section {
+        padding: 3rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tour-video h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .virtual-tours-section {
+        padding: 2rem 1rem;
+    }
+    
+    .tours-container {
+        gap: 1.5rem;
     }
 }

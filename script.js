@@ -283,60 +283,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// Function to load header and footer
-function loadHeaderFooter() {
-    const headerPlaceholder = document.getElementById('header-placeholder');
-    const footerPlaceholder = document.getElementById('footer-placeholder');
-    const currentPagePath = window.location.pathname;
-    const isRoot = currentPagePath.endsWith('/') || currentPagePath.endsWith('index.html') || !currentPagePath.substring(currentPagePath.lastIndexOf('/') + 1).includes('.');
-    const depth = currentPagePath.split('/').length - (isRoot ? 2 : 3); // Adjust depth calculation
-
-    // Determine base path for assets and components
-    let basePath = '';
-    if (depth > 0) {
-        basePath = '../'.repeat(depth);
-    }
-
-
-    if (headerPlaceholder) {
-        fetch(basePath + '_header.html')
-            .then(response => response.text())
-            .then(data => {
-                // Adjust paths in the fetched HTML
-                const adjustedData = data.replace(/assets\//g, basePath + 'assets/')
-                                         .replace(/href="([^"#]+)\.html"/g, (match, p1) => `href="${basePath}${p1}.html"`)
-                                         .replace(/href="#([^"]+)"/g, (match, p1) => {
-                                             // For internal page links like #home, #about, ensure they point to index.html if not on index page
-                                             if (!isRoot) {
-                                                 return `href="${basePath}index.html#${p1}"`;
-                                             }
-                                             return match; // Keep as is for index.html
-                                         });
-                headerPlaceholder.innerHTML = adjustedData;
-                // Re-initialize hamburger and dropdowns after header is loaded
-                initializeHeaderInteractions();
-            });
-    }
-
-    if (footerPlaceholder) {
-        fetch(basePath + '_footer.html')
-            .then(response => response.text())
-            .then(data => {
-                const adjustedData = data.replace(/assets\//g, basePath + 'assets/')
-                                         .replace(/href="([^"#]+)\.html"/g, (match, p1) => `href="${basePath}${p1}.html"`)
-                                         .replace(/href="#([^"]+)"/g, (match, p1) => {
-                                             if (!isRoot) {
-                                                 return `href="${basePath}index.html#${p1}"`;
-                                             }
-                                             return match;
-                                         });
-                footerPlaceholder.innerHTML = adjustedData;
-            });
-    }
-}
-
-// Call loadHeaderFooter when the DOM is ready
-document.addEventListener('DOMContentLoaded', loadHeaderFooter);
 
 // Encapsulate header-specific initializations
 function initializeHeaderInteractions() {

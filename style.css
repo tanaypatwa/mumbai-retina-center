@@ -2354,6 +2354,74 @@ h2 {
     font-style: italic;
 }
 
+/* Actual Associate Doctor Styles (not placeholder) */
+.associate-photo {
+    flex: 0 0 250px; /* Fixed width for photo area */
+    height: 300px; /* Fixed height */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.associate-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+}
+
+.associate-bio {
+    flex: 1; /* Takes remaining space */
+    text-align: left;
+}
+
+.associate-bio h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.associate-bio .subtitle {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.associate-bio p {
+    margin-bottom: 15px;
+    line-height: 1.7;
+    color: var(--grey-font-color);
+}
+
+.associate-bio .education-background,
+.associate-bio .interests,
+.associate-bio .current-practice {
+    margin-top: 25px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-color);
+}
+
+.associate-bio h4 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.associate-bio ul {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.associate-bio li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
 @media (max-width: 768px) {
     .associate-container {
         flex-direction: column;
@@ -2370,6 +2438,26 @@ h2 {
     }
     .associate-bio-placeholder h3 {
         font-size: 1.5rem;
+    }
+    
+    /* Mobile styles for actual associate doctor */
+    .associate-photo {
+        flex: 0 0 200px; /* Smaller fixed width for mobile */
+        width: 200px;
+        height: 240px;
+        margin-bottom: 20px;
+    }
+    .associate-bio {
+        text-align: center; /* Center text for stacked layout */
+    }
+    .associate-bio h3 {
+        font-size: 1.5rem;
+    }
+    .associate-bio .education-background,
+    .associate-bio .interests,
+    .associate-bio .current-practice {
+        text-align: left; /* Keep content sections left-aligned for readability */
+        margin-top: 20px;
     }
 }
 

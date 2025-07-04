@@ -1268,8 +1268,8 @@ h2 {
 
 .gallery-item img {
     width: 100%;
-    height: 260px;
-    object-fit: cover;
+    height: 220px; /* This sets a standard height for all gallery images. */
+    object-fit: cover; /* This makes the image cover the area without distortion. */
     transition: transform 0.35s ease;
 }
 
@@ -1331,6 +1331,8 @@ h2 {
 
 .gallery-item-scrolling img {
     width: 100%;
+    height: 220px; /* This sets a standard height for all gallery images. */
+    object-fit: cover; /* This makes the image cover the area without distortion. */
     display: block;
     transition: transform 0.3s ease;
 }

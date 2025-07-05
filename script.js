@@ -453,3 +453,54 @@ function showImageModal(src, title, description) {
 //         showImageModal(img.src, title, description);
 //     });
 // });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+    const submitButton = document.getElementById('submit-button');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Stop the form from submitting the traditional way
+
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData.entries());
+            const n8nWebhookUrl = 'https://n8n.srv871514.hstgr.cloud/webhook/mumbai-retina-centre-enquiry'; // <-- PASTE YOUR N8N PRODUCTION URL HERE
+
+            // Provide feedback to the user
+            submitButton.disabled = true;
+            formStatus.textContent = 'Sending...';
+            formStatus.style.color = 'var(--primary-color)';
+
+            fetch(n8nWebhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Even if response is ok, it might not be the JSON we expect from n8n.
+                    // n8n success response might be empty or have specific structure.
+                    // Assuming a successful submission if response.ok is true.
+                    return; 
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(() => {
+                formStatus.textContent = 'Message sent successfully!';
+                formStatus.style.color = 'var(--success-color)';
+                contactForm.reset(); // Clear the form
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                formStatus.textContent = 'An error occurred. Please try again later.';
+                formStatus.style.color = 'var(--danger-color)';
+            })
+            .finally(() => {
+                submitButton.disabled = false; // Re-enable the button
+            });
+        });
+    }
+});
